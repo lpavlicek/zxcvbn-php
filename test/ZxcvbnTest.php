@@ -3,6 +3,7 @@
 namespace ZxcvbnPhp\Test;
 
 use ZxcvbnPhp\Matchers\DictionaryMatch;
+use ZxcvbnPhp\Matchers\RepeatMatch;
 use ZxcvbnPhp\Matchers\Match;
 use ZxcvbnPhp\Zxcvbn;
 
@@ -78,6 +79,7 @@ class ZxcvbnTest extends \PHPUnit_Framework_TestCase
             ['h1dden_26191',       3, ['dictionary', 'bruteforce', 'date'      ], '3 days',             2555252800],
             ['4rfv1236yhn!',       4, ['spatial',    'sequence',   'bruteforce'], '1 month',            38980000000.414],
             ['BVidSNqe3oXVyE1996', 4, ['bruteforce', 'regex',                  ], 'centuries',          10000000000010000],
+            ['eduroameduroam',     2, ['repeat',                               ], '18 minutes',         10812001],
         ];
     }
 
@@ -120,6 +122,11 @@ class ZxcvbnTest extends \PHPUnit_Framework_TestCase
 
         $this->assertInstanceOf(DictionaryMatch::class, $result['sequence'][1], "user input match is correct class");
         $this->assertEquals('wQbg', $result['sequence'][1]->token, "user input match has correct token");
+
+        $result = $this->zxcvbn->passwordStrength('eduroameduroam', ['eduroam']);
+        $this->assertInstanceOf(RepeatMatch::class, $result['sequence'][0], "user input repeat - RepeatMatch is correct class");
+        $this->assertEquals(5, $result['guesses'], "user input repeat - has correct guesses");
+
     }
 
     public function testMultibyteUserDefinedWords()
