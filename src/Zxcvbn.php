@@ -65,12 +65,14 @@ class Zxcvbn
             $userInputs
         );
 
+        $sanitizedPassword = mb_substr($password,0,64,'UTF-8');
+
         // Get matches for $password.
         // Although the coffeescript upstream sets $sanitizedInputs as a property,
         // doing this immutably makes more sense and is a bit easier
-        $matches = $this->matcher->getMatches($password, $sanitizedInputs);
+        $matches = $this->matcher->getMatches($sanitizedPassword, $sanitizedInputs);
 
-        $result = $this->scorer->getMostGuessableMatchSequence($password, $matches);
+        $result = $this->scorer->getMostGuessableMatchSequence($sanitizedPassword, $matches);
         $attackTimes = $this->timeEstimator->estimateAttackTimes($result['guesses']);
         $feedback = $this->localize_feedback($this->feedback->getFeedback($attackTimes['score'], $result['sequence']));
 
