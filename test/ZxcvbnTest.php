@@ -136,4 +136,13 @@ class ZxcvbnTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf(DictionaryMatch::class, $result['sequence'][0], "user input match is correct class");
         $this->assertEquals('المفاتيح', $result['sequence'][0]->token, "user input match has correct token");
     }
+
+    public function testFeedbackLocalization()
+    {
+        $this->zxcvbn->setFeedbackLanguage('cs');
+        $result = $this->zxcvbn->passwordStrength('password1');
+
+        $this->assertEquals('Toto heslo patří mezi častá hesla', $result['feedback']['warning'], "feedback warning in czech");
+        $this->assertEquals('Přidejte jedno nebo dvě další slova. Čím neobyklejší, tím lépe.', $result['feedback']['suggestions'][0], "feedback suggestions in czech");
+    }
 }

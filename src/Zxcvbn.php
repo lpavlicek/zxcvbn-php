@@ -29,6 +29,11 @@ class Zxcvbn
      */
     protected $feedback;
 
+    /**
+     * @var
+     */
+    protected $translations = NULL;
+
     public function __construct()
     {
         $this->matcher = new \ZxcvbnPhp\Matcher();
@@ -67,7 +72,7 @@ class Zxcvbn
 
         $result = $this->scorer->getMostGuessableMatchSequence($password, $matches);
         $attackTimes = $this->timeEstimator->estimateAttackTimes($result['guesses']);
-        $feedback = $this->feedback->getFeedback($attackTimes['score'], $result['sequence']);
+        $feedback = $this->localize_feedback($this->feedback->getFeedback($attackTimes['score'], $result['sequence']));
 
         return array_merge(
             $result,
@@ -77,5 +82,48 @@ class Zxcvbn
                 'calc_time' => microtime(true) - $timeStart
             ]
         );
+    }
+
+    /**
+     * Set the language for the feedback.
+     * Translations files are in lang subdirectory.
+     *
+     * @param string $language  the language of the feedback
+     */
+    public function setFeedbackLanguage($language) {
+        $lang_file = dirname(__FILE__) . '/lang/' . $language . '.json'; 
+        if (file_exists($lang_file)) {
+            $lang_file_content = file_get_contents($lang_file);
+            $this->translations = json_decode($lang_file_content, true);
+        }
+    }
+
+    private function translate($phrase) {
+        $translation=NULL;
+        if (! empty($this->translations)) {
+            $translation = $this->translations[$phrase];
+        }
+        if (empty($translation)) {
+            return $phrase;
+        }
+        else {
+            return $translation;
+        }
+    }
+
+    private function localize_feedback(array $feedback) {
+        if (empty($this->translations)) {
+            return $feedback;
+        }
+        if (!empty($feedback['warning'])) {
+            $feedback['warning'] = $this->translate($feedback['warning']);
+        }
+        $suggestions = [];
+        for($i = 0; $i < count($feedback['suggestions']); $i++) {
+
+            array_push($suggestions, $this->translate($feedback['suggestions'][$i]));
+        }
+        $feedback['suggestions'] = $suggestions;
+        return $feedback;
     }
 }
