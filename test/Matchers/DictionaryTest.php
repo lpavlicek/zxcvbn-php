@@ -327,9 +327,9 @@ class DictionaryTest extends AbstractMatchTest
     {
         $feedback = $this->getFeedbackForToken('university', 'english_wikipedia', 69, false);
         $this->assertEquals(
-            '',
+            'This is similar to a commonly used word',
             $feedback['warning'],
-            "dictionary match doesn't warn about Wikipedia word (not a sole match)"
+            "dictionary match warn about Wikipedia word (not a sole match)"
         );
     }
 
@@ -357,9 +357,9 @@ class DictionaryTest extends AbstractMatchTest
     {
         $feedback = $this->getFeedbackForToken('know', 'us_tv_and_film', 9, true);
         $this->assertEquals(
-            '',
+            'A word by itself is easy to guess',
             $feedback['warning'],
-            "no warning for match from us_tv_and_film dictionary"
+            "warning for match from us_tv_and_film dictionary"
         );
     }
 

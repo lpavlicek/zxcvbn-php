@@ -105,33 +105,32 @@ class DictionaryMatch extends Match
 
     public function getFeedbackWarning($isSoleMatch)
     {
-        switch ($this->dictionaryName) {
-            case 'passwords':
-                if ($isSoleMatch && !$this->l33t && !$this->reversed) {
-                    if ($this->rank <= 10) {
-                        return 'This is a top-10 common password';
-                    } elseif ($this->rank <= 100) {
-                        return 'This is a top-100 common password';
-                    } else {
-                        return 'This is a very common password';
-                    }
-                } elseif ($this->getGuessesLog10() <= 4) {
-                    return 'This is similar to a commonly used password';
-                }
-                break;
-            case 'english_wikipedia':
-                if ($isSoleMatch) {
-                    return 'A word by itself is easy to guess';
-                }
-                break;
-            case 'surnames':
-            case 'male_names':
-            case 'female_names':
-                if ($isSoleMatch) {
-                    return 'Names and surnames by themselves are easy to guess';
+        if (strpos($this->dictionaryName, 'password') !== false) {
+            if ($isSoleMatch && !$this->l33t && !$this->reversed) {
+                if ($this->rank <= 10) {
+                    return 'This is a top-10 common password';
+                } elseif ($this->rank <= 100) {
+                    return 'This is a top-100 common password';
                 } else {
-                    return 'Common names and surnames are easy to guess';
+                    return 'This is a very common password';
                 }
+            } elseif ($this->getGuessesLog10() <= 4) {
+                return 'This is similar to a commonly used password';
+            }
+        }
+        elseif (strpos($this->dictionaryName, 'name') !== false) {
+            if ($isSoleMatch) {
+                return 'Names and surnames by themselves are easy to guess';
+            } else {
+                return 'Common names and surnames are easy to guess';
+            }
+        }
+        else {
+            if ($isSoleMatch) {
+                return 'A word by itself is easy to guess';
+            } elseif ($this->getGuessesLog10() <= 4) {
+                return 'This is similar to a commonly used word';
+            }
         }
 
         return '';
