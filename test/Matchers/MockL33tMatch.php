@@ -6,7 +6,7 @@ use ZxcvbnPhp\Matchers\L33tMatch;
 
 class MockL33tMatch extends L33tMatch
 {
-    protected static function getRankedDictionaries()
+    public static function getRankedDictionaries($frequency_lists_file = 'frequency_lists.json')
     {
         return [
             'words' => [

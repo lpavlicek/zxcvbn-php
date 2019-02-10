@@ -174,10 +174,15 @@ class DictionaryMatch extends Match
      *
      * @return array
      */
-    protected static function getRankedDictionaries()
+    public static function getRankedDictionaries($frequency_lists_file = 'frequency_lists.json')
     {
         if (empty(self::$rankedDictionaries)) {
-            $json = file_get_contents(dirname(__FILE__) . '/frequency_lists.json');
+            $filename = dirname(__FILE__) . '/' . $frequency_lists_file;
+            if (! file_exists($filename)) {
+                $filename = dirname(__FILE__) . '/frequency_lists.json';
+            }
+            $json = file_get_contents($filename);
+
             $data = json_decode($json, true);
 
             $rankedLists = [];

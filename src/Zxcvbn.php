@@ -34,12 +34,14 @@ class Zxcvbn
      */
     protected $translations = NULL;
 
-    public function __construct()
+    public function __construct($frequency_lists_file = 'frequency_lists.json')
     {
         $this->matcher = new \ZxcvbnPhp\Matcher();
         $this->scorer = new \ZxcvbnPhp\Scorer();
         $this->timeEstimator = new \ZxcvbnPhp\TimeEstimator();
         $this->feedback = new \ZxcvbnPhp\Feedback();
+        #
+        \ZxcvbnPhp\Matchers\DictionaryMatch::getRankedDictionaries($frequency_lists_file);
     }
 
     /**
@@ -65,6 +67,7 @@ class Zxcvbn
             $userInputs
         );
 
+        // Only first 64 characters
         $sanitizedPassword = mb_substr($password,0,64,'UTF-8');
 
         // Get matches for $password.
