@@ -129,7 +129,7 @@ def main():
     unfiltered_freq_lists = parse_frequency_lists(data_dir)
     freq_lists = filter_frequency_lists(unfiltered_freq_lists)
     with codecs.open(output_file, 'w', 'utf8') as f:
-        json.dump(freq_lists, f)
+        json.dump(freq_lists, f, separators=(',', ':'))
 
 if __name__ == '__main__':
     main()
