@@ -106,7 +106,7 @@ class SpatialMatch extends Match
             $shiftedCount = 0;
 
             // Check if the initial character is shifted
-            if ($graphName === 'qwerty' || $graphName === 'dvorak') {
+            if ($graphName === 'qwerty' || $graphName === 'dvorak' || $graphName === 'qwertzcs' || $graphName === 'qwertzsk') {
                 if (mb_strpos(self::SHIFTED_CHARACTERS, mb_substr($password, $i, 1)) !== false) {
                     $shiftedCount++;
                 }
@@ -202,6 +202,8 @@ class SpatialMatch extends Match
             $data = [
                 'qwerty' => $data['qwerty'],
                 'dvorak' => $data['dvorak'],
+                'qwertzcs' => $data['qwertzcs'],
+                'qwertzsk' => $data['qwertzsk'],
                 'keypad' => $data['keypad'],
                 'mac_keypad' => $data['mac_keypad'],
             ];
@@ -213,7 +215,7 @@ class SpatialMatch extends Match
 
     protected function getRawGuesses()
     {
-        if ($this->graph === 'qwerty' || $this->graph === 'dvorak') {
+        if ($this->graph === 'qwerty' || $this->graph === 'dvorak' || $this->graph === 'qwertzcs' || $this->graph === 'qwertzsk') {
             $startingPosition = self::KEYBOARD_STARTING_POSITION;
             $averageDegree = self::KEYBOARD_AVERAGE_DEGREES;
         } else {
