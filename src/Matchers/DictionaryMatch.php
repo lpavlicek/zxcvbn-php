@@ -148,10 +148,14 @@ class DictionaryMatch extends Match
         $result = [];
         $length = mb_strlen($password);
 
+        if ($length < 3) {
+            return $result;
+        }
+
         $pw_lower = mb_strtolower($password);
 
-        foreach (range(0, $length - 1) as $i) {
-            foreach (range($i, $length - 1) as $j) {
+        foreach (range(0, $length - 3) as $i) {
+            foreach (range($i + 2, $length - 1) as $j) {
                 $word = mb_substr($pw_lower, $i, $j - $i + 1);
 
                 if (isset($dict[$word])) {
