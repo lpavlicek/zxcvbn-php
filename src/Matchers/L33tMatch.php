@@ -128,7 +128,8 @@ class L33tMatch extends DictionaryMatch
             's' => ['$', '5'],
             't' => ['+', '7'],
             'x' => ['%'],
-            'z' => ['2'],
+            'z' => ['2','y'],
+            'y' => ['z'],
         ];
     }
 
