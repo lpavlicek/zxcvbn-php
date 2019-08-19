@@ -24,8 +24,8 @@ class ZxcvbnTest extends \PHPUnit_Framework_TestCase
 
         // zxcvbn will return two matches: 'rock' (rank 359) and 'you' (rank 1).
         // If tested alone, the word 'you' would return only 1 guess, but because it's part of a larger password,
-        // it should return the minimum number of guesses, which is 50 for a multi-character token.
-        $this->assertEquals(50, $matches[1]->getGuesses());
+        // it should return the minimum number of guesses, which is 40 for a multi-character token.
+        $this->assertEquals(40, $matches[1]->getGuesses());
     }
 
     public function typeDataProvider()
@@ -71,15 +71,15 @@ class ZxcvbnTest extends \PHPUnit_Framework_TestCase
             ['password',           0, ['dictionary',                           ], 'less than a second', 3],
             ['65432',              0, ['sequence',                             ], 'less than a second', 101],
             ['sdfgsdfg',           1, ['repeat',                               ], 'less than a second', 2595.0000000276],
-            ['fortitude',          1, ['dictionary',                           ], '1 second',           11308],
+            ['fortitude',          1, ['dictionary',                           ], '2 seconds',          21015],
             ['dfjkym',             1, ['bruteforce',                           ], '2 minutes',          1000001],
-            ['fortitude22',        2, ['dictionary', 'repeat',                 ], '2 minutes',          1140700],
-            ['absoluteadnap',      2, ['dictionary', 'dictionary',             ], '25 minutes',         15187504],
-            ['knifeandspoon',      3, ['dictionary', 'dictionary', 'dictionary'], '1 day',              1108057600],
-            ['h1dden_26191',       3, ['dictionary', 'bruteforce', 'date'      ], '3 days',             2555252800],
-            ['4rfv1236yhn!',       4, ['spatial',    'sequence',   'bruteforce'], '1 month',            38980000000.414],
-            ['BVidSNqe3oXVyE1996', 4, ['bruteforce', 'regex',                  ], 'centuries',          10000000000010000],
-            ['eduroameduroam',     2, ['repeat',                               ], '18 minutes',         10812001],
+            ['fortitude22',        2, ['dictionary', 'repeat',                 ], '3 minutes',          1682120],
+            ['absoluteadnap',      2, ['dictionary', 'dictionary',             ], '7 minutes',          4060264],
+            ['knifeandspoon',      3, ['dictionary', 'dictionary', 'dictionary'], '2 days',             2095868080],
+            ['h1dden_26191',       3, ['dictionary', 'bruteforce', 'date'      ], '3 days',             2345631520],
+            ['4rfv1236yhn!',       4, ['spatial',    'sequence', 'spatial', 'bruteforce'], '22 days',   18736744960.377728],
+            ['BVidSNqe3oXVyE1996', 4, ['bruteforce', 'regex',                  ], 'centuries',          8000000000001000],
+            ['eduroameduroam',     0, ['repeat',                               ], 'less than a second', 991],
         ];
     }
 
@@ -125,8 +125,7 @@ class ZxcvbnTest extends \PHPUnit_Framework_TestCase
 
         $result = $this->zxcvbn->passwordStrength('eduroameduroam', ['eduroam']);
         $this->assertInstanceOf(RepeatMatch::class, $result['sequence'][0], "user input repeat - RepeatMatch is correct class");
-        $this->assertEquals(5, $result['guesses'], "user input repeat - has correct guesses");
-
+        $this->assertEquals(991, $result['guesses'], "user input repeat - has correct guesses");
     }
 
     public function testMultibyteUserDefinedWords()

@@ -247,14 +247,14 @@ class L33tTest extends AbstractMatchTest
     {
         $this->checkMatches(
             "matches against overlapping l33t patterns",
-            L33tMatch::match('marie1'),
+            L33tMatch::match('ba1l'),
             'dictionary',
-            ['marie1', 'arie1'],
-            [[0,5], [1,5]],
+            ['ba1l', 'ba1l', 'a1l'],
+            [[0,3], [0,3], [1, 3]],
             [
-                'l33t'           => [true, true],
-                'sub'            => [['1' => 'l'], ['1' => 'l'],],
-                'matchedWord'    => ['mariel', 'ariel'],
+                'l33t'           => [true, true, true],
+                'sub'            => [['1' => 'i'], ['1' => 'l'], ['1' => 'l'],],
+                'matchedWord'    => ['bail', 'ball', 'all'],
             ]
         );
     }

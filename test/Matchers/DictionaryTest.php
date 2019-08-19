@@ -15,10 +15,10 @@ class DictionaryTest extends AbstractMatchTest
             'cdef' => 5,
         ],
         'd2' => [
-            'z' => 1,
-            '8' => 2,
-            '99' => 3,
-            '$' => 4,
+            'zxa' => 1,
+            '873' => 2,
+            '998' => 3,
+            '$$%' => 4,
             'asdf1234&*' => 5
         ]
     ];
@@ -81,17 +81,17 @@ class DictionaryTest extends AbstractMatchTest
 
     public function testUppercasingIgnored()
     {
-        $password = 'BoaRdZ';
-        $patterns = ['BoaRd', 'Z'];
+        $password = 'BoaRdZxa';
+        $patterns = ['BoaRd', 'Zxa'];
 
         $this->checkMatches(
             "ignores uppercasing",
             DictionaryMatch::match($password, [], self::$testDicts),
             'dictionary',
             $patterns,
-            [[0, 4], [5, 5]],
+            [[0, 4], [5, 7]],
             [
-                'matchedWord' => ['board', 'z'],
+                'matchedWord' => ['board', 'zxa'],
                 'rank' => [3, 1],
                 'dictionaryName' => ['d1', 'd2'],
             ]
@@ -157,8 +157,8 @@ class DictionaryTest extends AbstractMatchTest
             [[0, 2]],
             [
                 'matchedWord' => $patterns,
-                'rank' => [322],
-                'dictionaryName' => ['us_tv_and_film'],
+                'rank' => [628],
+                'dictionaryName' => ['en_wiki_film'],
             ]
         );
     }
@@ -204,15 +204,15 @@ class DictionaryTest extends AbstractMatchTest
 
     public function testMatchesInMultipleDictionaries()
     {
-        $password = 'pass';
+        $password = 'ball';
         $this->checkMatches(
             "matches words in multiple dictionaries",
             DictionaryMatch::match($password),
             'dictionary',
-            ['pass', 'as', 'ass'],
-            [[0, 3], [1, 2], [1, 3]],
+            ['ball', 'all'],
+            [[0, 3], [1, 3]],
             [
-                'dictionaryName' => ['passwords', 'english_wikipedia', 'us_tv_and_film']
+                'dictionaryName' => ['us_names', 'en_wiki_film']
             ]
         );
     }

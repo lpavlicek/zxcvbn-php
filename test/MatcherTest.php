@@ -31,13 +31,13 @@ class MatcherTest extends TestCase
     public function testMultiplePatterns()
     {
         $matcher = new Matcher();
-        $password = 'r0sebudmaelstrom11/20/91aaaa';
+        $password = 'r0sebudchlorine11/20/91aaaa';
 
         $expectedMatches = [
             ['dictionary', [ 0,  6]],
-            ['dictionary', [ 7, 15]],
-            ['date',       [16, 23]],
-            ['repeat',     [24, 27]]
+            ['dictionary', [ 7, 14]],
+            ['date',       [15, 22]],
+            ['repeat',     [23, 26]]
         ];
 
         $matches = $matcher->getMatches($password);

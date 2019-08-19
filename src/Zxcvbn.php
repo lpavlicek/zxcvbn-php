@@ -32,7 +32,7 @@ class Zxcvbn
     /**
      * @var
      */
-    protected $translations = NULL;
+    protected $translations = null;
 
     public function __construct($frequency_lists_file = 'frequency_lists.json')
     {
@@ -68,7 +68,7 @@ class Zxcvbn
         );
 
         // Only first 64 characters
-        $sanitizedPassword = mb_substr($password,0,64,'UTF-8');
+        $sanitizedPassword = mb_substr($password, 0, 64, 'UTF-8');
 
         // Get matches for $password.
         // Although the coffeescript upstream sets $sanitizedInputs as a property,
@@ -77,7 +77,7 @@ class Zxcvbn
 
         $result = $this->scorer->getMostGuessableMatchSequence($sanitizedPassword, $matches);
         $attackTimes = $this->timeEstimator->estimateAttackTimes($result['guesses']);
-        $feedback = $this->localize_feedback($this->feedback->getFeedback($attackTimes['score'], $result['sequence']));
+        $feedback = $this->localizeFeedback($this->feedback->getFeedback($attackTimes['score'], $result['sequence']));
 
         return array_merge(
             $result,
@@ -95,28 +95,30 @@ class Zxcvbn
      *
      * @param string $language  the language of the feedback
      */
-    public function setFeedbackLanguage($language) {
-        $lang_file = dirname(__FILE__) . '/lang/' . $language . '.json'; 
+    public function setFeedbackLanguage($language)
+    {
+        $lang_file = dirname(__FILE__) . '/lang/' . $language . '.json';
         if (file_exists($lang_file)) {
             $lang_file_content = file_get_contents($lang_file);
             $this->translations = json_decode($lang_file_content, true);
         }
     }
 
-    private function translate($phrase) {
-        $translation=NULL;
+    private function translate($phrase)
+    {
+        $translation = null;
         if (! empty($this->translations)) {
             $translation = $this->translations[$phrase];
-        }
+        };
         if (empty($translation)) {
             return $phrase;
-        }
-        else {
+        } else {
             return $translation;
         }
     }
 
-    private function localize_feedback(array $feedback) {
+    private function localizeFeedback(array $feedback)
+    {
         if (empty($this->translations)) {
             return $feedback;
         }
@@ -124,8 +126,7 @@ class Zxcvbn
             $feedback['warning'] = $this->translate($feedback['warning']);
         }
         $suggestions = [];
-        for($i = 0; $i < count($feedback['suggestions']); $i++) {
-
+        for ($i = 0; $i < count($feedback['suggestions']); $i++) {
             array_push($suggestions, $this->translate($feedback['suggestions'][$i]));
         }
         $feedback['suggestions'] = $suggestions;

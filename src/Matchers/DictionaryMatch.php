@@ -117,15 +117,13 @@ class DictionaryMatch extends Match
             } elseif ($this->getGuessesLog10() <= 4) {
                 return 'This is similar to a commonly used password';
             }
-        }
-        elseif (strpos($this->dictionaryName, 'name') !== false) {
+        } elseif (strpos($this->dictionaryName, 'name') !== false) {
             if ($isSoleMatch) {
                 return 'Names and surnames by themselves are easy to guess';
             } else {
                 return 'Common names and surnames are easy to guess';
             }
-        }
-        else {
+        } else {
             if ($isSoleMatch) {
                 return 'A word by itself is easy to guess';
             } elseif ($this->getGuessesLog10() <= 4) {
