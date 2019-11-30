@@ -7,7 +7,7 @@ use ZxcvbnPhp\Matcher;
 class YearMatch extends Match
 {
 
-    const NUM_YEARS = 119;
+    //const NUM_YEARS = 119;
 
     public $pattern = 'regex';
     public $regexName = 'recent_year';

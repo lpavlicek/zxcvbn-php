@@ -6,7 +6,7 @@ use ZxcvbnPhp\Matchers\DateMatch;
 use ZxcvbnPhp\Matchers\Match;
 use ZxcvbnPhp\Matchers\MatchInterface;
 
-class MatchTest extends \PHPUnit_Framework_TestCase
+class MatchTest extends \PHPUnit\Framework\TestCase
 {
     public function binomialDataProvider()
     {

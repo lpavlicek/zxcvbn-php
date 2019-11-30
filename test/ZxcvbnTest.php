@@ -7,7 +7,7 @@ use ZxcvbnPhp\Matchers\RepeatMatch;
 use ZxcvbnPhp\Matchers\Match;
 use ZxcvbnPhp\Zxcvbn;
 
-class ZxcvbnTest extends \PHPUnit_Framework_TestCase
+class ZxcvbnTest extends \PHPUnit\Framework\TestCase
 {
     /** @var Zxcvbn */
     private $zxcvbn;

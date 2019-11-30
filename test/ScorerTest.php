@@ -8,9 +8,9 @@ use ZxcvbnPhp\Test\Matchers\MockMatch;
 /**
  * @covers \ZxcvbnPhp\Scorer
  */
-class ScorerTest extends \PHPUnit_Framework_TestCase
+class ScorerTest extends \PHPUnit\Framework\TestCase
 {
-    const PASSWORD = '0123456789';
+    private const PASSWORD = '0123456789';
 
     /** @var Scorer */
     private $scorer;

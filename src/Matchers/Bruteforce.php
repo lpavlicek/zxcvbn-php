@@ -13,7 +13,7 @@ use ZxcvbnPhp\Scorer;
 class Bruteforce extends Match
 {
 
-    const BRUTEFORCE_CARDINALITY = 10;
+    protected const BRUTEFORCE_CARDINALITY = 10;
 
     public $pattern = 'bruteforce';
 
