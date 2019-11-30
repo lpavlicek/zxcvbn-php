@@ -6,7 +6,7 @@ use ZxcvbnPhp\Matcher;
 
 class SpatialMatch extends Match
 {
-    protected const SHIFTED_CHARACTERS = '~!@#$%^&*()_+QWERTYUIOP{}|ASDFGHJKL:"ZXCVBNM<>?';
+    const SHIFTED_CHARACTERS = '~!@#$%^&*()_+QWERTYUIOP{}|ASDFGHJKL:"ZXCVBNM<>?';
 
     // Preset properties since adjacency graph is constant for qwerty keyboard and keypad.
     const KEYBOARD_STARTING_POSITION = 94;
