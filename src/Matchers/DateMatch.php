@@ -7,13 +7,13 @@ use ZxcvbnPhp\Matcher;
 class DateMatch extends Match
 {
     //const NUM_YEARS = 119; // Years match against 1900 - 2019
-    protected const NUM_MONTHS = 12;
-    protected const NUM_DAYS = 31;
+    const NUM_MONTHS = 12;
+    const NUM_DAYS = 31;
 
-    protected const MIN_YEAR = 1000;
-    protected const MAX_YEAR = 2050;
+    const MIN_YEAR = 1000;
+    const MAX_YEAR = 2050;
 
-    public const MIN_YEAR_SPACE = 20;
+    const MIN_YEAR_SPACE = 20;
     
     public $pattern = 'date';
 
@@ -43,7 +43,7 @@ class DateMatch extends Match
         ],
     ];
 
-    protected const DATE_NO_SEPARATOR = '/^\d{4,8}$/u';
+    const DATE_NO_SEPARATOR = '/^\d{4,8}$/u';
 
     /**
      * (\d{1,4})        # day, month, year
@@ -52,7 +52,7 @@ class DateMatch extends Match
      * \2               # same separator
      * (\d{1,4})        # day, month, year
      */
-    protected const DATE_WITH_SEPARATOR = '/^(\d{1,4})([\s\/\\\\_.-])(\d{1,2})\2(\d{1,4})$/u';
+    const DATE_WITH_SEPARATOR = '/^(\d{1,4})([\s\/\\\\_.-])(\d{1,2})\2(\d{1,4})$/u';
 
     /** @var int The day portion of the date in the token. */
     public $day;

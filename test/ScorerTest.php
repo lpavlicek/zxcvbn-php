@@ -10,7 +10,7 @@ use ZxcvbnPhp\Test\Matchers\MockMatch;
  */
 class ScorerTest extends \PHPUnit\Framework\TestCase
 {
-    private const PASSWORD = '0123456789';
+    const PASSWORD = '0123456789';
 
     /** @var Scorer */
     private $scorer;

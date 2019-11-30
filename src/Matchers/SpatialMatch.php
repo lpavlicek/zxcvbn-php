@@ -9,10 +9,10 @@ class SpatialMatch extends Match
     protected const SHIFTED_CHARACTERS = '~!@#$%^&*()_+QWERTYUIOP{}|ASDFGHJKL:"ZXCVBNM<>?';
 
     // Preset properties since adjacency graph is constant for qwerty keyboard and keypad.
-    public const KEYBOARD_STARTING_POSITION = 94;
-    public const KEYPAD_STARTING_POSITION = 15;
-    public const KEYBOARD_AVERAGE_DEGREES = 4.5957446809; // 432 / 94
-    public const KEYPAD_AVERAGE_DEGREES = 5.0666666667; // 76 / 15
+    const KEYBOARD_STARTING_POSITION = 94;
+    const KEYPAD_STARTING_POSITION = 15;
+    const KEYBOARD_AVERAGE_DEGREES = 4.5957446809; // 432 / 94
+    const KEYPAD_AVERAGE_DEGREES = 5.0666666667; // 76 / 15
 
     public $pattern = 'spatial';
 

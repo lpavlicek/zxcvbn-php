@@ -13,9 +13,9 @@ use ZxcvbnPhp\Matchers\Match;
  */
 class Scorer
 {
-    public const MIN_GUESSES_BEFORE_GROWING_SEQUENCE = 1000;
-    public const MIN_SUBMATCH_GUESSES_SINGLE_CHAR = 10;
-    public const MIN_SUBMATCH_GUESSES_MULTI_CHAR = 40;
+    const MIN_GUESSES_BEFORE_GROWING_SEQUENCE = 1000;
+    const MIN_SUBMATCH_GUESSES_SINGLE_CHAR = 10;
+    const MIN_SUBMATCH_GUESSES_MULTI_CHAR = 40;
 
     protected $password;
     protected $excludeAdditive;
